@@ -1,0 +1,9 @@
+import osmnx as ox
+
+# Coloque o endereço
+endereco = "Betim"
+
+# Geocodifica o endereço para achar as coordenadas
+localizacao = ox.geocode(endereco)
+
+print(f"Coordenadas (latitude, longitude): {localizacao}")
