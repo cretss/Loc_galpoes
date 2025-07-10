@@ -1,0 +1,68 @@
+import folium
+import folium.features
+from folium.plugins import MousePosition
+import pandas as pd
+
+#Aqui foi necessário criar um arquivo XLSX chamado dados_1, na primeira Coluna com "Codigo" e "Pop" dessa forma eu peguei o geocodigos dos lugares e a população, para avergiguar onde tem mais população
+
+# Cria o mapa
+mapa_estado_sp = folium.Map(location=[-22.90, -47.06], zoom_start=6)
+
+#folium.TileLayer(tiles=branca.utilities.image_to_url([[1,1],[1,1]]),attr="EESC Finance",name="Imagem Fundo").add_to(mapa_estado_sp)
+
+# Adiciona a posição do mouse
+MousePosition().add_to(mapa_estado_sp)
+
+# Define o estilo do GeoJSON
+style = lambda x: {"color": "Black", "fillOpacity": 0, "weight": 1}
+
+# Obrigado deepSeek
+'''
+try:
+    arquivo_geojson = "SP.min.json"  
+    with open(arquivo_geojson, "r", encoding="utf-8") as f:
+        geojson_data = f.read()
+    
+    # Adiciona o GeoJSON ao mapa
+    folium.GeoJson(geojson_data, style_function=style, name="distritos").add_to(mapa_estado_sp)
+    print("GeoJSON carregado com sucesso!")
+except FileNotFoundError:
+    print(f"Erro: Arquivo '{arquivo_geojson}' não encontrado.")
+except Exception as e:
+    print(f"Erro ao carregar o GeoJSON: {e}")
+
+# Adiciona o Choropleth ao mapa
+folium.Choropleth(
+    geo_data=geojson_data,  
+    data=dados_1,
+    columns=["Codigo", "Pop"],
+    key_on="feature.properties.GEOCODIGO",  
+    fill_color="Blues",
+    fill_opacity=0.7,  
+    legend_name="Pop"
+).add_to(mapa_estado_sp)
+'''
+#adicionar destaque 
+estilo = lambda x : {"fillcolor" : "white",
+                     "color": "black",
+                     "fill_opacity" : 0.001,
+                     "weight" : 0.001}
+
+estilo_destaque = lambda x : {"fillcolor" : "darkblue",
+                     "color": "black",
+                     "fill_opacity" : 0.5,
+                     "weight" : 1}
+
+
+'''
+group_1 = folium.FeatureGroup("first group").add_to(mapa_estado_sp)
+folium.Marker((-23.7224, -46.553), icon=folium.Icon("purple")).add_to(group_1)
+folium.Marker((-23.66, -46.52), icon=folium.Icon("purple")).add_to(group_1)
+folium.Marker((-23.53, -46.79), icon=folium.Icon("purple")).add_to(group_1)
+folium.Marker((-23.419, -46.458), icon=folium.Icon("purple")).add_to(group_1)
+folium.Marker((-22.90, -47.06), icon=folium.Icon("blue")).add_to(group_1)
+folium.Marker((-23.17, -45.89), icon=folium.Icon("blue")).add_to(group_1)
+folium.Marker((-23.47, -47.49), icon=folium.Icon("blue")).add_to(group_1)
+folium.Marker((-21.18, -47.81), icon=folium.Icon("blue")).add_to(group_1)
+folium.Marker((-23.55, -46.64), icon=folium.Icon("red")).add_to(group_1)
+'''
